@@ -35,7 +35,7 @@ Dodatne upute:
 		- Kod registracije usera, generira se qr kod kao profilna slika (default) svaki korisnik to moze zamjeniti
 	- PDF izvještaj
 		- izvještaj po jednom tasku (u izvještaju se nalaze ime, opis, autor, slike i sve ostale info od taska)
-	- MS excell
+	- MS excel
 		- excel tablica ispisuje sve taskove sa datumima (u dobrom formatu) početka i kraja
 		- list (sheet) se zove "podaci".
 	- funkcionalnost putem ajaxa
