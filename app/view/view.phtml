@@ -1,0 +1,66 @@
+<a href="<?php echo App::config("url") ?>">Index</a><hr />
+
+<?php if(Session::getInstance()->isLoggedIn() &&
+    ($post->getUserid()==Session::getInstance()->getUser()->id || Session::getInstance()->getUser()->id==1)): ?>
+<a href="<?php echo App::config("url") ?>admin/delete/<?php echo $post->getId() ?>">Delete posts (and all likes and comments)</a><br />
+<?php endif; ?>
+
+<cite><?= htmlspecialchars($post->getUser()) ?></cite>  <?php echo $post->date ?>
+
+<p><?= htmlspecialchars($post->getContent()) ?></p> Likes: <?php echo $post->getLikes() ?>
+
+<h3>Comments</h3>
+
+<?php foreach ($post->getComments() as $comment): ?>
+<div class="timeline">
+    <div class="container left">
+        <div class="content">
+            <cite><?= htmlspecialchars($comment->user) ?></cite>
+            <?php echo $comment->date ?><br />
+            <?php echo $comment->content ?>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+
+
+
+
+
+
+
+    <p>
+
+    </p>
+
+
+
+
+
+
+
+
+<?php if( Session::getInstance()->isLoggedIn() ): ?>
+
+<form method="post" action="<?php echo App::config('url') ?>admin/comment/<?php echo $post->getId() ?>">
+
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br/>
+    <div class="fb-share-button"
+         data-href="https://www.codemeright.com/facebook-share-button.html"
+         data-layout="button"
+         data-size="small"
+         data-mobile-iframe="true">
+        <a target="_blank"
+           href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.codemeright.com%2Ffacebook-share-button.html&amp;src=sdkpreparse"
+           class="fb-xfbml-parse-ignore">Share</a>
+    </div>
+
+    <div class="form-group">
+        <label for="content">New comment</label>
+        <input id="content" name="content">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+</form>
+<?php endif; ?>

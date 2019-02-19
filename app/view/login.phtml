@@ -1,0 +1,18 @@
+
+
+<?php echo $message ?>
+
+<form method="post" action="<?php echo App::config('url') ?>admin/authorize">
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" value="admin@admin.com">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" value="admin">
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Authorize</button>
+    <a href="<?php echo App::config('url') ?>">Cancel</a>
+</form>
