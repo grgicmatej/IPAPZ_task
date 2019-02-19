@@ -10,7 +10,6 @@ class Session
 
     public function login($user)
     {
-        
         $_SESSION['is_logged_in'] = $user;
     }
 
@@ -35,5 +34,4 @@ class Session
     public  function getUser(){
        return isset($_SESSION['is_logged_in']) ? $_SESSION['is_logged_in'] : false;
     }
-
 }

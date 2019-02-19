@@ -6,7 +6,7 @@ return [
     "db"=>[
         "host"=>"localhost",
         "name"=>"polaznik05_zavrsni",
-        "user"=>"matej",
-        "password"=>"Grgmaticej1."
+        "user"=>"ipa",
+        "password"=>"ipa"
     ]
 ];

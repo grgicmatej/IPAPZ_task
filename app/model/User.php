@@ -5,7 +5,7 @@ class user
     public static function find($id)
     {
         $db = Db::connect();
-        $statement = $db->prepare("select * from user where id=:id");
+        $statement = $db->prepare("select * from users where id=:id");
         $statement->execute(["id"=>$id]);
         return $statement->fetch();
     }
@@ -14,7 +14,7 @@ class user
     {
         var_dump(intval($id));
         $db = Db::connect();
-        $statement = $db->prepare("UPDATE user SET firstname=:firstname,lastname=:lastname,email=:email,pass=:pass where id=:id ");
+        $statement = $db->prepare("UPDATE users SET firstName=:firstName,lastName=:lastName,email=:email,password=:password where id=:id ");
         $infodata = self::infodata();
         $infodata["id"]=intval($id);
         var_dump($_POST)."<br />";
@@ -24,10 +24,10 @@ class user
     }
     private static function infodata(){
         return [
-            "firstname"=>Request::post("firstname"),
-            "lastname"=>Request::post("lastname"),
+            "firstName"=>Request::post("firstName"),
+            "lastName"=>Request::post("lastName"),
             "email"=>Request::post("email"),
-            "pass"=>password_hash(Request::post("pass"), PASSWORD_DEFAULT),
+            "password"=>password_hash(Request::post("password"), PASSWORD_DEFAULT),
         ];
     }
 

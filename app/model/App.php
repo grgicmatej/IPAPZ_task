@@ -2,7 +2,6 @@
 
 final class App
 {
-
     /**
      * Resolves and dispatch controller/action
      */
@@ -24,14 +23,12 @@ final class App
         } else {
             $action = strtolower($pathParts[1]);
         }
-
         //resolve action
         if(!isset($pathParts[2]) || empty($pathParts[2])) {
             $id = 0;
         } else {
             $id = strtolower($pathParts[2]);
         }
-
         //dispatch
         if (class_exists($controller) && method_exists($controller, $action)) {
             $controllerInstance = new $controller();

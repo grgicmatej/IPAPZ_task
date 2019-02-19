@@ -1,0 +1,25 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ipa
+ * Date: 19.02.19.
+ * Time: 18:01
+ */
+?>
+<form class="log-in-form" method="post" action="<?php echo App::config("url")?>user/edit/<?php echo Session::getInstance()->getUser()->id ?>">
+    <div class="form-group">
+        <label for="firstname">First name</label>
+        <input type="firstname" name="firstName">
+
+        <label for="lastname">Last name</label>
+        <input type="lastname" name="lastName">
+
+        <label for="password">Password</label>
+        <input type="password" name="password">
+
+        <label for="password">Confirm password</label>
+        <input type="password" name="confirmpassword">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="<?php echo App::config('url') ?>">Cancel</a>
+</form>

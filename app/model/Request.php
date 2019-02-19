@@ -23,7 +23,6 @@ class Request
         }
     }
 
-
     public static function post($key, $default='')
     {
       return isset($_POST[$key]) ? $_POST[$key] : $default;

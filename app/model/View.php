@@ -4,7 +4,6 @@ class View
 {
     private $layout;
 
-
     public function __construct($layout = "layout")
     {
         $this->layout = basename($layout);

@@ -4,34 +4,35 @@ class UserController
 {
     public function prepareedit()
     {
+        /*$db = Db::connect();
+        $stmt = $db->prepare("select * from users where id=:id");
+        $stmt -> bindValue('id',Request::post("id"));
+        $stmt-> execute();
+        $user = $stmt->fetch();
+        var_dump( $user->firstName);*/
         $view = new View();
         $view->render('users/edit',["message"=>""]);
     }
 
     public function edit($id)
     {
-        if(Request::post("pass")!==Request::post("confirmpass")){
+        if(Request::post("password")!==Request::post("confirmpassword")){
             $view = new View();
             $view->render('users/edit',["message"=>"passwords are not equal"]);
         }else{
             $control=$this->control();
             if($control===true){
-                try{
+
                     $db = Db::connect();
-                    $stmt = $db->prepare("update user set firstname = :firstname, lastname = :lastname, email = :email, pass = :pass where id = :id");
-                    $stmt ->bindValue('firstname', Request::post("firstname"));
-                    $stmt ->bindValue('lastname', Request::post("lastname"));
-                    $stmt ->bindValue('email', Request::post("email"));
-                    $stmt ->bindValue('pass', password_hash(Request::post("pass"), PASSWORD_DEFAULT));
+                    $stmt = $db->prepare("update users set firstName = :firstName, lastName = :lastName, password = :password where id = :id");
+                    $stmt ->bindValue('firstName', Request::post("firstName"));
+                    $stmt ->bindValue('lastName', Request::post("lastName"));
+                    $stmt ->bindValue('password', password_hash(Request::post("password"), PASSWORD_DEFAULT));
                     $stmt ->bindValue('id',$id);
                     $stmt ->execute();
                     Session::getInstance()->logout();
                     $view = new View();
                     $view ->render('login',["message"=>"please login again"]);
-                }catch (PDOException $exception){
-                    $view = new View();
-                    $view->render('users/edit',["message"=>"email already exists!"]);
-                }
             }else{
                 $view = new View();
                 $view->render('users/edit',["message"=>$control]);
@@ -40,29 +41,29 @@ class UserController
     }
 
     public function control()
-    {
-        if(Request::post("firstname")===""){
+    {/*
+        if(Request::post("firstName")===""){
             return "First name is mandatory!";
         }
-        if(Request::post("lastname")===""){
+        if(Request::post("lastName")===""){
             return "Last name is mandatory!";
         }
         if(Request::post("email")===""){
             return "Email name is mandatory!";
         }
-        if(Request::post("pass")===""){
+        if(Request::post("password")===""){
             return "Password is mandatory!";
         }
-        if(strlen(Request::post("firstname"))<1 || strlen(Request::post("firstname"))>30){
+        if(strlen(Request::post("firstName"))<1 || strlen(Request::post("firstName"))>30){
             return "First name is too short or too long!";
         }
         $db = Db::connect();
-        $statement = $db->prepare("select count(id) from user where email=:email and id<>:id");
+        $statement = $db->prepare("select count(id) from users where email=:email and id<>:id");
         $statement->execute(["email"=>Request::post("email"), "id" => Request::post("id")]);
         $total = $statement->fetchColumn();
         if($total>0){
             return "Email already exists!";
-        }
+        }*/
         return true;
     }
 
