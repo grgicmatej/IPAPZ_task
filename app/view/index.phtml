@@ -1,11 +1,7 @@
-<div class="large-12 column" style="text-align: right; margin-top: 1cm">
-    <a href="readme">Readme!</a>
-</div>
-
     <?php if(!Session::getInstance()->isLoggedIn()): ?>
         <div class="large-6 column" style="text-align: left; margin-top: 1cm">
             <a href="<?php echo App::config("url")."admin/login" ?>">Login</a>
-            <a href="<?php echo App::config("url")."admin/registration" ?>">Registration</a>
+
         </div>
     <?php else: ?>
         <div class="large-12 column" style="text-align: left; margin-top: 1cm">
@@ -14,16 +10,23 @@
         <div class="large-12 column" style="text-align: left">
             <a href="<?php echo App::config("url")?>user/prepareedit/<?php echo Session::getInstance()->getUser()->id ?>">Edit user</a>
         </div>
+        <?php if(Request::post("email")==="admin@task.com"): ?> <!-- Ovo je admin dio gdje on može pregledati usere-->
+            <div class="large-12 column" style="text-align: left">
+                <p>test</p>
+                <a href="<?php echo App::config("url")?>user/prepareedit/<?php echo Session::getInstance()->getUser()->id ?>">User list</a>
+                <a href="<?php echo App::config("url")?>admin/registration">Registration</a>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if(Session::getInstance()->isLoggedIn()):?>
-        <div style="display: inline-block">
-            <div class="large-6 column" style="margin-top: 2cm; width: 100%">
+        <div class="row">
+            <div class="large-6 columns">
 
                 <p>Ovo je logirani dio, tu staviti popis taskova sa sa imenom taska, vlasnikom taska, statusom i rokom zavrsavanja</p>
 
             </div>
-            <div class="large-6 column" style="margin-top: 2cm; width: 100%"">
+            <div class="large-6 columns">
 
                 <p>Ovo je logirani dio, tu staviti popis usera</p>
 
@@ -47,8 +50,12 @@
 <br><br><br><br><br>
 <h3>MAKNI POSLIJE!</h3>
 <h5>taskovi:</h5>
+- napravi crud usera<br>
+    + user moze update sam sebe<br>
+    + ne moze obrisati niti kreirati usera<br>
+    admin moze kreirati i obrisati usera<br>
 - makni sivu boju<br>
-- sredi index.phtml<br>
-- update radi ali<br>
-- Odvoji update na update imena, update lozinke, update slike<br>
-- admin forma za obrisat usera<br>
+- napraviti link "pregled profila<br>
+    unutra link promjeni korisničko ime<br>
+    unutra link promjeni korisničku lozinku<br>
+
