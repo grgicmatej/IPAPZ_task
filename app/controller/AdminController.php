@@ -34,9 +34,6 @@ class AdminController
         $view->render('login',["message"=>""]);
     }
 
-
-
-
     public function authorize()
     {
         //ne dostaju kontrole
@@ -83,5 +80,47 @@ class AdminController
         ]);
     }
 
+    public function userslist()
+    {
+        $db = Db::connect();
+        $stmt = $db->query("select * from users")->fetchAll();
+        //$stmt -> execute();
+        //var_dump($stmt);
+        $view = new View();
+        $view->render('users/userlist',["message"=>$stmt]);
+    }
+
+    public function taskslist()
+    {
+        $view = new View();
+        $view->render('tasks/taskslist',["message"=>""]);
+    }
+
+    public function newtaskprepare()
+    {
+        $view = new View();
+        $view->render('tasks/newtask',["message"=>""]);
+    }
+
+    public function newtask()
+    {
+        $db = Db::connect();
+        $statement = $db->prepare("insert into tasks (taskName, users, taskStartTime, taskEndTime, taskDescription, taskStatus, taskCategory) values 
+                                  (:taskName,:users,:taskStartTime,:taskEndTime,:taskDescription,:taskStatus,:taskCategory)");
+        $statement->bindValue('taskName', Request::post("taskName"));
+        $statement->bindValue('users', Request::post("users"));
+        $statement->bindValue('taskStartTime', Request::post("taskStartTime"));
+        $statement->bindValue('taskEndTime',Request::post("taskEndTime"));
+        $statement->bindValue('taskDescription', Request::post("taskDescription"));
+        $statement->bindValue('taskStatus', Request::post("taskStatus"));
+        $statement->bindValue('taskCategory', Request::post("taskCategory"));
+        $statement->execute();
+        $this->index();
+        /*
+        Session::getInstance()->logout();
+        $view = new View();
+        $view->render('login',["message"=>""]);
+        */
+        }
 
 }
