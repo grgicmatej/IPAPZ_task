@@ -11,28 +11,7 @@ class AdminController
         ]);
     }
 
-    public function registration()
-    {
-        $view = new View();
-        $view->render('registration',["message"=>""]);
-    }
 
-    public function register()
-    {
-        $db = Db::connect();
-        $statement = $db->prepare("insert into users (firstName,lastName,email,password,profilePicture) values 
-                                  (:firstName,:lastName,:email,:password,:profilePicture)");
-        $statement->bindValue('firstName', Request::post("firstName"));
-        $statement->bindValue('lastName', Request::post("lastName"));
-        $statement->bindValue('email', Request::post("email"));
-        $statement->bindValue('password', password_hash(Request::post("password"),PASSWORD_DEFAULT));
-        $statement->bindValue('profilePicture','null'); // tu naknadno stavi putanju
-        $statement->execute();
-
-        Session::getInstance()->logout();
-        $view = new View();
-        $view->render('login',["message"=>""]);
-    }
 
     public function authorize()
     {
@@ -90,37 +69,32 @@ class AdminController
         $view->render('users/userlist',["message"=>$stmt]);
     }
 
-    public function taskslist()
-    {
-        $view = new View();
-        $view->render('tasks/taskslist',["message"=>""]);
-    }
 
-    public function newtaskprepare()
-    {
-        $view = new View();
-        $view->render('tasks/newtask',["message"=>""]);
-    }
 
-    public function newtask()
+    public function control()
     {
-        $db = Db::connect();
-        $statement = $db->prepare("insert into tasks (taskName, users, taskStartTime, taskEndTime, taskDescription, taskStatus, taskCategory) values 
-                                  (:taskName,:users,:taskStartTime,:taskEndTime,:taskDescription,:taskStatus,:taskCategory)");
-        $statement->bindValue('taskName', Request::post("taskName"));
-        $statement->bindValue('users', Request::post("users"));
-        $statement->bindValue('taskStartTime', Request::post("taskStartTime"));
-        $statement->bindValue('taskEndTime',Request::post("taskEndTime"));
-        $statement->bindValue('taskDescription', Request::post("taskDescription"));
-        $statement->bindValue('taskStatus', Request::post("taskStatus"));
-        $statement->bindValue('taskCategory', Request::post("taskCategory"));
-        $statement->execute();
-        $this->index();
-        /*
-        Session::getInstance()->logout();
-        $view = new View();
-        $view->render('login',["message"=>""]);
-        */
+        if(Request::post("firstName")===""){
+            return "First name is mandatory!";
         }
-
+        if(Request::post("lastName")===""){
+            return "Last name is mandatory!";
+        }
+        if(Request::post("email")===""){
+            return "Email name is mandatory!";
+        }
+        if(Request::post("password")===""){
+            return "Password is mandatory!";
+        }
+        if(strlen(Request::post("firstName"))<1 || strlen(Request::post("firstName"))>30){
+            return "First name is too short or too long!";
+        }
+        $db = Db::connect();
+        $statement = $db->prepare("select count(id) from users where email=:email and id<>:id");
+        $statement->execute(["email"=>Request::post("email"), "id" => Request::post("id")]);
+        $total = $statement->fetchColumn();
+        if($total>0){
+            return "Email already exists!";
+        }
+        return true;
+    }
 }

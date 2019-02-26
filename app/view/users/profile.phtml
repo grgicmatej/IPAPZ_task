@@ -1,0 +1,78 @@
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <?php if(Session::getInstance()->isLoggedIn()):?>
+        <div class="large-10 columns small-12"style="min-height: 10cm">
+            <div class="grid-x">
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-4 columns hide-for-small-only">
+                    <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $message->firstName.$message->lastName.$message->email?>>choe=UTF-8" title="<?=$message->firstName ?>" />
+                </div>
+                <div class="large-4 small-12 columns">
+                    <p class="backButton">First name : <?=$message->firstName ?><br /></p>
+                    <p class="backButton">Last name : <?=$message->lastName ?><br /></p>
+                    <p class="backButton">email : <?=$message->email ?><br /></p>
+                    <a href="<?php echo App::config("url")?>user/prepareeditname/<?=$message->id?>"><p class="backButton">Edit name</p></a>
+                    <a href="<?php echo App::config("url")?>user/prepareeditpassword/<?=$message->id?>"><p class="backButton">Edit password</p></a>
+                </div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-12 columns hide-for-small-only" style="margin-top: 2rem"></div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-8 columns">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Task name</th>
+                            <th>Task end time</th>
+                            <th>Task status</th>
+                            <th class="hide-for-small-only">Task category</th>
+                            <th class="hide-for-small-only">Task description</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($tasks as $task):?>
+                            <tr>
+                                <td><?= $task->taskName ?></td>
+                                <td><?= $task->taskEndTime ?></td>
+                                <td><?= $task->taskStatus ?></td>
+                                <td class="hide-for-small-only"><?= $task->taskCategory ?></td>
+                                <td class="hide-for-small-only"><?= $task->taskDescription ?></td>
+                                <td><a href="<?php echo App::config('url') ?>task/view/<?=$task->id ?>"><p class="seeMoreButton">See details</p></a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-12 columns">
+                    <?php if(Session::getInstance()->isLoggedIn()&&Session::getInstance()->getUser()->id==="1"&&$message->email!="admin@task.com"): ?>
+                        <a href="<?php echo App::config("url")?>user/delete/<?=$message->id?>"><p class="backButton">Delete this user</p></a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12">
+        <ul class="menu" data-dropdown-menu>
+            <li>
+                <a href="<?php echo App::config('url') ?>"><p class="paginButton"> Back to homepage </p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+
+<!-- dodati tagove
+srediti formu
+dodati share facebook, twitter,
+pdf izvoz
+obriši task
+uredi task

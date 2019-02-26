@@ -1,0 +1,88 @@
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <?php if(Session::getInstance()->isLoggedIn()):?>
+
+    <?php
+        if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
+        }
+        $no_of_records_per_page = 10;
+        $offset = ($pageno-1) * $no_of_records_per_page;
+        $conn=mysqli_connect("localhost","polaznik05","Inc00PAk.","polaznik05_zavrsni");
+        // Check connection
+        if (mysqli_connect_errno()){
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            die();
+        }
+        $total_pages_sql = "SELECT COUNT(*) FROM tasks";
+        $result = mysqli_query($conn,$total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+        $total_pages = ceil($total_rows / $no_of_records_per_page);
+        $sql = "SELECT * FROM tasks LIMIT $offset, $no_of_records_per_page";
+        $res_data = mysqli_query($conn,$sql);
+    ?>
+
+    <div class="large-10 columns small-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Task name</th>
+                    <th>Task end time</th>
+                    <th>Task status</th>
+                    <th class="hide-for-small-only">Task category</th>
+                    <th class="hide-for-small-only">Task description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $task=$tasks;
+                    $offsetTest=$offset;while($offsetTest<($no_of_records_per_page*$pageno)&&$offsetTest<$total_rows){
+                ?>
+                <tr>
+                    <td><?= $task[$offsetTest]->taskName ?></td>
+                    <td><?= $task[$offsetTest]->taskEndTime ?></td>
+                    <td><?= $task[$offsetTest]->taskStatus ?></td>
+                    <td class="hide-for-small-only"><?= $task[$offsetTest]->taskCategory ?></td>
+                    <td class="hide-for-small-only"><?= $task[$offsetTest]->taskDescription ?></td>
+                    <td><a href="<?php echo App::config('url') ?>task/view/<?=$task[$offsetTest]->id ?>"><p class="seeMoreButton">See details</p></a></td>
+                </tr>
+                <?php $offsetTest++;};
+                mysqli_close($conn);?>
+            </tbody>
+        </table>
+    </div>
+    <?php endif; ?>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12">
+        <ul class="menu" data-dropdown-menu>
+            <li>
+                <a href="?pageno=1"><p class="paginButton"> First </p></a>
+            </li>
+            <li>
+                <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"><p class="paginButton"> Prev </p></a>
+            </li>
+            <li>
+                <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>"><p class="paginButton"> Next </p></a>
+            </li>
+            <li>
+                <a href="?pageno=<?php echo $total_pages; ?>"><p class="paginButton"> Last </p></a>
+            </li>
+            <li>
+                <a href="<?php echo App::config('url') ?>"><p class="paginButton"> Back to homepage </p></a>
+            </li>
+        </ul>
+    </div>
+        <div class="large-1 columns"></div>
+    </div>
+</div>
+

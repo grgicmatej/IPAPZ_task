@@ -1,163 +1,140 @@
-.form-inline {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+.no-js{
+    background-color: dimgrey;
 }
-
-.form-inline label {
-    margin: 5px 10px 5px 0;
+.body1{
+    background-color: dimgrey;
 }
-
-.form-inline input {
-    vertical-align: middle;
-    margin: 5px 10px 5px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+.grid-x.grid-padding-x.header{
+    background-color: #516B75;
+    border-radius: 0.3cm;
 }
-
-.form-inline button {
-    padding: 10px 20px;
-    background-color: dodgerblue;
-    border: 1px solid #ddd;
+.headlineDate{
     color: white;
-    cursor: pointer;
-}
+    text-decoration-style: solid;
+    height: 1.5rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
 
-.form-inline button:hover {
-    background-color: royalblue;
 }
+.headline{
+    color: white;
+    text-decoration-style: solid;
+    height: 2rem;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
 
-* {
-    box-sizing: border-box;
 }
-
-body {
-    background-color: #474e5d;
-    font-family: Helvetica, sans-serif;
+.headlineLogin{
+    color: white;
+    text-decoration-style: solid;
+    height: 2rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
 }
-
-/* The actual timeline (the vertical ruler) */
-.timeline {
+.large-3.cell.header{
+    background-color: #353A3B;
+    border-radius: 0.3cm;
+}
+.large-6.cell.header{
+    background-color: #353A3B;
+    border-radius: 0.3cm;
+}
+.large-3.cell.main{
     position: relative;
-    max-width: 1200px;
+    float: right;
+    color: black;
+    text-decoration-style: solid;
+    background-color: #353A3B;
+    border-radius: 0.3cm;
+    text-align: center;
+    height: auto;
+    min-height: 10cm;
+}
+.large-9.cell.main{
+    position: relative;
+    float: right;
+    background-color: #516B75;
+    border-radius: 0.3cm;
+    text-align: left;
+    color: white;
+    height: auto;
+    min-height: 10cm;
+}
+.title-bar-title{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.adminMenu {
+    background-color: white;
+    color: black;
+    width: 100%;
+    text-align: left;
+}
+.backButton{
+    color: white;
+    text-decoration-style: solid;
+    height: 1.5rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+}
+.seeMoreButton{
+    color: black;
+    text-decoration-style: solid;
+    height: 1.5rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+}
+.paginButton{
+    color: white;
+    text-decoration-style: solid;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.menu {
+    background-color: #353A3B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 720px;
     margin: 0 auto;
+    list-style: none;
 }
-
-/* The actual timeline (the vertical ruler) */
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: white;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
+.menu.li {
+    width: 125px;
+    transition: background-position-x 0.9s linear;
+    text-align: center;
 }
-
-/* Container around content */
-.container {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
+.large-10.columns.headerBackButton{
+    background-color: #353A3B;
+    border-radius: 0.3cm;
 }
+.register{
+    color: white;
+    text-decoration-style: solid;
+    height: 1.5rem;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
 
-/* The circles on the timeline */
-.container::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -17px;
-    background-color: white;
-    border: 4px solid #FF9F55;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
 }
+.homepageButton{
+    color: white;
+    text-decoration-style: solid;
+    height: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
 
-/* Place the container to the left */
-.left {
-    left: 0;
 }
-
-/* Place the container to the right */
-.right {
-    left: 50%;
-}
-
-/* Add arrows to the left container (pointing right) */
-.left::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    right: 30px;
-    border: medium solid white;
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent white;
-}
-
-/* Add arrows to the right container (pointing left) */
-.right::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border: medium solid white;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-}
-
-/* Fix the circle for containers on the right side */
-.right::after {
-    left: -16px;
-}
-
-/* The actual content */
-.content {
-    padding: 20px 30px;
-    background-color: white;
-    position: relative;
-    border-radius: 6px;
-}
-
-/* Media queries - Responsive timeline on screens less than 600px wide */
-@media screen and (max-width: 600px) {
-    /* Place the timelime to the left */
-    .timeline::after {
-        left: 31px;
-    }
-
-    /* Full-width containers */
-    .container {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-
-    /* Make sure that all arrows are pointing leftwards */
-    .container::before {
-        left: 60px;
-        border: medium solid white;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent white transparent transparent;
-    }
-
-    /* Make sure all circles are at the same spot */
-    .left::after, .right::after {
-        left: 15px;
-    }
-
-    /* Make all right containers behave like the left ones */
-    .right {
-        left: 0%;
-    }
-}}

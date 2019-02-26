@@ -1,71 +1,45 @@
-<div class="grid-x grid-padding-x" style="margin-top: 3cm">
-    <div class="large-10 cell" style="text-align: center">
-        TASK NASLOV
+<div class="grid-x grid-padding-x header">
+    <?php include_once "main/headline.php"?>
+    <div class="large-3 cell main" style=" text-align: center;">
+        <hr>
+        <?php include_once "main/menu.php"?>
     </div>
-    <div class="large-2 cell">
-        <?php if(!Session::getInstance()->isLoggedIn()): ?>
-                <a href="<?php echo App::config("url")."admin/login" ?>">Login</a>
-
+    <div class="large-9 cell main" style=" text-align: center;">
+        <?php if(Session::getInstance()->isLoggedIn()):?> <!-- logiran dio -->
+            <hr>
+            <p>
+                <h4>Check your profile for new tasks!</h4><br>
+                <p class="homepageButton">Search tasks</p></a>
+                <div class="grid-x">
+                    <div class="large-12 columns"></div>
+                    <div class="large-4 columns hide-for-small-only"></div>
+                    <div class="large-4 columns small-12 columns">
+                        <form class="log-in-form" method="post" action="<?php echo App::config("url")?>task/search">
+                            <div class="form-group">
+                                <input type="text" name="taskName" style="text-align: center;">
+                            </div>
+                            <p class="register"><button type="submit" class="register">Search</button></p>
+                        </form>
+                    </div>
+                </div>
+            </p>
         <?php else: ?>
-                <a href="<?php echo App::config("url")?>admin/logout">Logout <?php echo Session::getInstance()->getUser()->name ?></a>
-                <a href="<?php echo App::config("url")?>user/prepareedit/<?php echo Session::getInstance()->getUser()->id ?>">Edit user</a>
+            <hr>
+            <p> <h2>Welcome!</h2></p>
+            <p> <h4>Log in to see your tasks</h4>
+                <h4>or</h4>
+            <a href="<?php echo App::config("url")?>task/publicTasks/"><p class="homepageButton">See statistics</p></a>
+
+            <br>
 
         <?php endif; ?>
     </div>
-
-
-    <div class="large-8">
-
-        <?php if(Session::getInstance()->isLoggedIn()):?>
-                    <hr>
-                    <p>
-                        Ovo je logirani dio, tu staviti popis taskova koji su naslovljeni na logiranu osobu
-                    </p>
-                    <p>
-                        neki footer, paginacija?
-                    </p>
-        <?php else: ?>
-                <p> Ovo je dio gdje nije ulogiran</p>
-                <p>- statistika zauzetosti djelatnika unutar radnog vremena<br>
-                    - task (staviti koliko traje jedan task)<br>
-                    - statistika koliko je odrađeno sve skupa(taskova/projekata) u nekom vremenskom razdoblju <br></p>
-        <?php endif; ?>
-
     </div>
-    <div class="large-3" style="text-align: right">
-
-        <?php if(Session::getInstance()->getUser()->id==="1"): ?> <!-- Ovo je admin dio gdje on može pregledati usere-->
-                <hr>
-                <br><p>Admin menu</p>
-                <a href="<?php echo App::config("url")?>admin/userslist/">User list</a><br>
-                <a href="<?php echo App::config("url")?>admin/taskslist/">Task list</a><br>
-                <a href="<?php echo App::config("url")?>admin/newtaskprepare/">Assign new task</a><br>
-                <a href="<?php echo App::config("url")?>admin/registration">New user registration</a><br>
-        <?php endif; ?>
-    </div>
-
 </div>
 
 
-<?php if(!Session::getInstance()->isLoggedIn()): ?>
-        <div class="large-6 column" style="text-align: left; margin-top: 1cm">
-            <a href="<?php echo App::config("url")."admin/login" ?>">Login</a>
-
-        </div>
-    <?php else: ?>
-        <div class="large-12 column" style="text-align: left; margin-top: 1cm">
-            <a href="<?php echo App::config("url")?>admin/logout">Logout <?php echo Session::getInstance()->getUser()->name ?></a>
-        </div>
-        <div class="large-12 column" style="text-align: left">
-            <a href="<?php echo App::config("url")?>user/prepareedit/<?php echo Session::getInstance()->getUser()->id ?>">Edit user</a>
-        </div>
-
-
-
-    <?php endif; ?>
-
-
 <!--
+
 
 <br><br><br><br><br>
 <h3>MAKNI POSLIJE!</h3>

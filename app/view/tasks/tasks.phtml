@@ -1,0 +1,61 @@
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <?php if(!Session::getInstance()->isLoggedIn()):?>
+        <div class="large-10 columns small-12"style="min-height: 10cm">
+            <div class="grid-x">
+                <div class="large-1 columns hide-for-small-only"></div>
+                <div class="large-10 columns small-12 columns">
+                    <p class="homepageButton">All finished tasks</p>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Task name</th>
+                            <th>Task status</th>
+                            <th class="hide-for-small-only">Task category</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($publicTags as $task):?>
+                            <tr>
+                                <td><?= $task->taskName ?></td>
+                                <td><?= $task->taskStatus ?></td>
+                                <td class="hide-for-small-only"><?= $task->taskCategory ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="large-1 columns hide-for-small-only"></div>
+                <div class="large-12 columns">
+                    <?php if(Session::getInstance()->isLoggedIn()&&Session::getInstance()->getUser()->id==="1"): ?>
+                        <a href="<?php echo App::config("url")?>user/delete/<?=$message->id?>"><p class="backButton">Delete this user</p></a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12">
+        <ul class="menu" data-dropdown-menu>
+            <li>
+                <a href="<?php echo App::config('url') ?>"><p class="paginButton"> Back to homepage </p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+
+<!-- dodati tagove
+srediti formu
+dodati share facebook, twitter,
+pdf izvoz
+obriši task
+uredi task

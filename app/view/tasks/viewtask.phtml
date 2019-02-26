@@ -1,0 +1,100 @@
+<head>
+    <meta property="og:title" content="<?=$message->taskName ?>">
+    <meta property="og:description" content="<?=$message->taskDescription ?>">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="<?php echo App::config("url")?>task/view/<?=$message->id?>">
+
+    <meta name="twitter:title" content="<?=$message->taskName ?>">
+    <meta name="twitter:description" content=" <?=$message->taskDescription ?>">
+    <meta name="twitter:image" content="">
+    <meta name="twitter:card" content="">
+</head>
+
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <?php if(Session::getInstance()->isLoggedIn()):?>
+        <div class="large-10 columns small-12"style="min-height: 10cm">
+            <div class="grid-x">
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-4 columns hide-for-small-only">
+                    <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?php echo $message->taskName.$email->email?>>choe=UTF-8" title="<?=$message->taskName ?>" />
+
+                </div>
+                <div class="large-4 small-12 columns">
+                    <p class="backButton">Task name: <?=$message->taskName ?><br /></p>
+                    <p class="backButton">Task assigned user: <?=$email->firstName." ".$email->lastName." ".$email->email ?><br /></p>
+                    <br><p class="backButton">Task duration: <?=$message->taskTimeNeed ?> (h)<br /></p>
+                    <p class="backButton">Task end date: <?=$message->taskEndTime ?><br /></p>
+                    <p class="backButton">Task status: <?=$message->taskStatus ?><br /></p>
+                    <a href="<?php echo App::config("url")?>task/prepareedit/<?=$message->id?>"><p class="backButton">Edit task status</p></a>
+
+                </div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-12 columns hide-for-small-only" style="margin-top: 2rem"></div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-8 columns">
+                    <p class="backButton">Task description:<br/> <?=$message->taskDescription ?></p><br />
+                </div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-8 columns">
+                    <p class="backButton">Task tags:<br/>
+                    <?php foreach ($tags as $tag) {
+                        echo $tag->tagName." ";
+                    }?></p><br />
+                </div>
+                <div class="large-2 columns hide-for-small-only"></div>
+                <div class="large-12 columns">
+                    <?php if(Session::getInstance()->isLoggedIn()&&Session::getInstance()->getUser()->id==="1"): ?>
+                        <a href="<?php echo App::config("url")?>task/delete/<?=$message->id?>"><p class="backButton">Delete this task</p></a>
+                    <?php endif; ?>
+                    <div class="grid-x">
+                    <div class="large-4 columns hide-for-small-only"></div>
+                    <div class="large-6 columns small-12">
+                        <a href="http://www.facebook.com/sharer.php?u=<?php echo App::config("url")?>task/view/<?=$message->id?>" target="_blank">
+                            <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                        </a>
+                        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo App::config("url")?>task/view/<?=$message->id?>" target="_blank">
+                            <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                        </a>
+                        <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 <?php echo App::config("url")?>task/view/<?=$message->id?>">
+                            <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                        </a>
+                        <a href="http://reddit.com/submit?url=<?php echo App::config("url")?>task/view/<?=$message->id?>&amp;title=<?=$message->taskName ?>" target="_blank">
+                            <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+                        </a>
+                        <a href="https://twitter.com/share?url=<?php echo App::config("url")?>task/view/<?=$message->id?>&amp;title=<?=$message->taskName ?>&amp;text=<?=$message->taskName ?>&amp;hashtags=IPA" target="_blank">
+                            <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                        </a>
+                        <a href="<?php echo App::config('url')?>task/pdf/<?=$message->id?>">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Pdf_icon.png/110px-Pdf_icon.png" alt="pdf" width="50" height="50">
+                        </a>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12">
+        <ul class="menu" data-dropdown-menu>
+            <li>
+                <a href="<?php echo App::config('url') ?>"><p class="paginButton"> Back to homepage </p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+<!--
+dodati share facebook, twitter,
+pdf izvoz
+obriši task
+uredi task

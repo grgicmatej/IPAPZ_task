@@ -10,17 +10,20 @@
         <div class="grid-x">
             <div class="large-4 medium-4 hide-for-small-only"></div>
             <div class="large-4 medium-4 small-12 columns">
-                <?php echo $message ?>
-                <form method="post" action="<?php echo App::config('url') ?>admin/authorize">
-                    <div class="form-group">
-                        <p class="register"><label for="email">Email</label></p>
-                        <input type="email" name="email" value="admin@task.com" style="text-align: center;">
+                <?php if(Session::getInstance()->isLoggedIn()):?>
+                    <form class="log-in-form" method="post" action="<?php echo App::config("url")?>user/editname/<?php echo Session::getInstance()->getUser()->id ?>">
+                        <?= $message ?>
 
-                        <p class="register"><label for="password">Password</label></p>
-                        <input type="password" name="password" value="admin" style="text-align: center;">
-                    </div>
-                    <p class="register"><button type="submit" class="register">Authorize</button></p>
-                </form>
+                        <div class="form-group">
+                            <label for="firstname">First name</label>
+                            <input type="text" name="firstName" style="text-align: center;">
+
+                            <label for="lastname">Last name</label>
+                            <input type="text" name="lastName"style="text-align: center;">
+                        </div>
+                        <p class="register"><button type="submit" class="register">Update</button></p>
+                    </form>
+                <?php endif; ?>
             </div>
             <div class="large-4 medium-4 hide-for-small-only"></div>
         </div>

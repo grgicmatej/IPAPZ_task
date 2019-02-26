@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'url' => 'http://polaznik05mvc.inchoo4u.net/',
+    'url' => 'http://polaznik05zavrsni.inchoo4u.net/',
     'mode'  => 'development',
     "db"=>[
         "host"=>"localhost",
         "name"=>"polaznik05_zavrsni",
-        "user"=>"ipa",
-        "password"=>"ipa"
+        "user"=>"polaznik05",
+        "password"=>"Inc00PAk."
     ]
 ];

@@ -31,4 +31,29 @@ class user
         ];
     }
 
+    public static function read()
+    {
+        $db = Db::connect();
+        $stmt = $db->prepare("select id, firstName, lastName, email from users");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public static function findEmail($id)
+    {
+        $db = Db::connect();
+        $statement = $db->prepare("select firstName, lastName, email from users where id=:id");
+        $statement->bindValue('id',$id);
+        $statement->execute();
+        return $statement->fetch();
+    }
+
+    public static function delete($id)
+    {
+        $db = Db::connect();
+        $statement = $db->prepare("delete from users where id=:id");
+        $statement->bindValue('id',$id);
+        $statement->execute();
+    }
+
 }

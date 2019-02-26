@@ -1,0 +1,65 @@
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <?php if(Session::getInstance()->isLoggedIn()):?>
+        <div class="large-10 columns small-12">
+            <?php if($message==0):?>
+                <p class="homepageButton"><?=$message?></p>
+
+            <?php else:?>
+            <table>
+                <thead>
+                <tr>
+                    <th>Task name</th>
+                    <th>Task end time</th>
+                    <th>Task status</th>
+                    <th class="hide-for-small-only">Task category</th>
+                    <th class="hide-for-small-only">Task description</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($message as $task): ?>
+                    <tr>
+                        <td><?= $task->taskName ?></td>
+                        <td><?= $task->taskEndTime ?></td>
+                        <td><?= $task->taskStatus ?></td>
+                        <td class="hide-for-small-only"><?= $task->taskCategory ?></td>
+                        <td class="hide-for-small-only"><?= $task->taskDescription ?></td>
+                        <td><a href="<?php echo App::config('url') ?>task/view/<?=$task->id ?>"><p class="seeMoreButton">See details</p></a></td>
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12">
+        <ul class="menu" data-dropdown-menu>
+            <li>
+                <a href="?pageno=1"><p class="paginButton"> First </p></a>
+            </li>
+            <li>
+                <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>"><p class="paginButton"> Prev </p></a>
+            </li>
+            <li>
+                <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>"><p class="paginButton"> Next </p></a>
+            </li>
+            <li>
+                <a href="?pageno=<?php echo $total_pages; ?>"><p class="paginButton"> Last </p></a>
+            </li>
+            <li>
+                <a href="<?php echo App::config('url') ?>"><p class="paginButton"> Back to homepage </p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+</div>

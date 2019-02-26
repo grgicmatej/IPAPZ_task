@@ -30,6 +30,14 @@ class Db extends PDO
         return self::$instance[$name];
     }
 
+    public static function getInstance()
+    {
+        if(is_null(self::$instance))
+        {
+            self::$instance = new self(App::config("db"));
+        }
+        return self::$instance;
+    }
 
 
 }

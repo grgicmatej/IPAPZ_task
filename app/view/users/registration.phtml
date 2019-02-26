@@ -1,0 +1,48 @@
+<div class="grid-x grid-padding-x header" xmlns="http://www.w3.org/1999/html">
+    <div class="large-12 columns" style="height: 1rem"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns small-12">
+        <div class="grid-x">
+            <div class="large-4 medium-4 hide-for-small-only"></div>
+            <div class="large-4 medium-4 small-12 columns">
+                <?php if(Session::getInstance()->isLoggedIn()):?>
+                    <form method="post" action="<?php echo App::config('url') ?>user/register">
+                        <?php echo $message ?>
+                        <p class="backButton">Create new user</p>
+                        <div class="form-group">
+                            <p class="register"><label for="firstname">First name</label></p>
+                            <input type="text" name="firstName" style="text-align: center;">
+
+                            <p class="register"><label for="lastname">Last name</label></p>
+                            <input type="text" name="lastName" style="text-align: center;">
+
+                            <p class="register"><label for="email">Email</label></p>
+                            <input type="email" name="email" style="text-align: center;">
+
+                            <p class="register"><label for="password">Password</label></p>
+                            <input type="password" name="password" style="text-align: center;">
+                            <p class="register"><button type="submit" class="register">Register</button></p>
+                        </div>
+                    </form>
+                <?php endif; ?>
+            </div>
+            <div class="large-4 medium-4 hide-for-small-only"></div>
+        </div>
+    </div>
+    <div class="large-1 columns"></div>
+    <div class="large-1 columns"></div>
+    <div class="large-10 columns headerBackButton small-12 columns">
+        <a href="<?php echo App::config('url') ?>"><p class="backButton">Back to homepage</p></a>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+
+
+
+
+
